@@ -17,9 +17,18 @@ namespace Sexangle.Web
             BuildWebHost(args).Run();
         }
 
-        public static IWebHost BuildWebHost(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
+        public static IWebHost BuildWebHost(string[] args)
+        {
+            return new WebHostBuilder()
+                .UseKestrel()
+                .UseContentRoot(Directory.GetCurrentDirectory())
+                .UseIISIntegration()
                 .UseStartup<Startup>()
                 .Build();
+
+            //return WebHost.CreateDefaultBuilder(args)
+            //    .UseStartup<Startup>()
+            //    .Build();
+        }
     }
 }

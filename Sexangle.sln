@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2020
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sexangle.Web", "Sexangle.Web\Sexangle.Web.csproj", "{90526594-3594-4FE2-8D2B-D19739B88A5F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sexangle.Web", "Sexangle.Web\Sexangle.Web.csproj", "{90526594-3594-4FE2-8D2B-D19739B88A5F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ReadMe", "ReadMe", "{0BE11790-2E77-41A4-A2A0-5842ED6B93FE}"
 	ProjectSection(SolutionItems) = preProject

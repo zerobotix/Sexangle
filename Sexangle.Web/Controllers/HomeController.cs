@@ -12,6 +12,7 @@ namespace Sexangle.Web.Controllers
     {
         public IActionResult Index()
         {
+            return Redirect("/pattern");
             return View();
         }
 
