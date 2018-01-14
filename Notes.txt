@@ -1,0 +1,3 @@
+Recommended extensions by visual studio:
+Bootstrap SnippetPack
+Glyphfriend 2017
