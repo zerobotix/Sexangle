@@ -1,0 +1,78 @@
+<html>
+<head>
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <div>
+        <label for="scale">Scale:</label><input id="scale" name="scale" type="text" />
+        <button>apply</button>
+    </div>
+    <br>
+    
+
+    <canvas id="patternCanvas" width="700" height="500" style="border: 1px solid gray;"></canvas>
+    <script>
+        var canvas = document.getElementById('patternCanvas');
+        var context = canvas.getContext('2d');
+
+        var centerX = canvas.width / 2;
+        var centerY = canvas.height / 2;
+
+        var minNumberOfPointsHorizontal = 3;
+        var minNumberOfPointsVertical = 3;
+        var maxNumberOfPointsHorizontal = minNumberOfPointsHorizontal + minNumberOfPointsVertical - 1;
+        var maxNumberOfPointsVertical = minNumberOfPointsVertical * 2 - 1;
+
+        var distanceBetweenPoints = 50;
+        var smallPointRadius = distanceBetweenPoints * 0.1;
+        var largePointRadius = distanceBetweenPoints * 0.47;
+
+        // hexagon won't work here
+        drawHexagon(context, distanceBetweenPoints * (minNumberOfPointsHorizontal), centerX, centerY)
+
+        function drawHexagon(canvas, size, x, y) {
+            canvas.beginPath();
+            canvas.moveTo(x + size * Math.cos(0), y + size * Math.sin(0));
+
+            for (var side = 0; side <= 6; side++) {
+              canvas.lineTo(x + size * Math.cos(side * 2 * Math.PI / 6), y + size * Math.sin(side * 2 * Math.PI / 6));
+            }
+
+            canvas.fillStyle = "#333333";
+            canvas.fill();
+        }
+
+
+        var startPointX = centerX - (maxNumberOfPointsHorizontal - 1) * distanceBetweenPoints / 2;
+        var startPointY = centerY - (maxNumberOfPointsVertical - 1) * distanceBetweenPoints * 0.866 / 2;
+
+        for (var i = 0; i < maxNumberOfPointsHorizontal; i++) {
+            for (var j = 0; j < maxNumberOfPointsVertical; j++) {
+                 if (i >= maxNumberOfPointsHorizontal - Math.abs(minNumberOfPointsVertical - j - 1)) {
+                     continue;
+                 }
+
+                var x = startPointX + i * distanceBetweenPoints + Math.abs(minNumberOfPointsVertical - j - 1) * distanceBetweenPoints * 0.5;
+                var y = startPointY + j * distanceBetweenPoints * Math.sqrt(1 * 1 - 0.5 * 0.5); // ~0.866
+                context.beginPath();
+                context.arc(x, y, largePointRadius, 0, 2 * Math.PI);
+                context.fillStyle = 'green';
+                context.fill();
+            }
+        }
+
+        context.beginPath();
+        context.arc(centerX, centerY, smallPointRadius, 0, 2 * Math.PI);
+        context.fillStyle = 'red';
+        context.fill();
+        context.lineWidth = 4;
+        context.strokeStyle = 'orange';
+        context.stroke();
+        
+
+
+
+    </script>
+
+</body>
+</html>
