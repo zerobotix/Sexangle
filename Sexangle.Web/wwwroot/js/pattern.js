@@ -1,5 +1,7 @@
 // layer = { map : array[][], style : {}}
 
+// global.drawingOptions = { size : { distanceBetweenPoints, etc } }
+
 function createEmptyLayer(topSideCount, leftSideCount)
 {
     var rowsCount = leftSideCount * 2 - 1;
@@ -72,6 +74,28 @@ function drawFrontLayer(canvas, layer)
     }
 }
 
+function getCellByCoordinates(x, y)
+{
+    var rowIndex = (y - startPointY) / distanceBetweenPoints; // 0 <= rowIndex < maxVerticalNumberOfPoints
+    var colIndex = (x - startPointX) / distanceBetweenPoints - Math.abs(leftSideCount - rowIndex - 1) / 2; // 0 <= colIndex < ???
+    console.log(rowIndex, colIndex);
+}
+
+function canvasOnMouseMove(e)
+{
+    var x, y;
+    x = e.pageX;
+    y = e.pageY;
+}
+
+function canvasOnClick(e)
+{
+    var x = e.pageX; // todo: page, screen, client? https://stackoverflow.com/questions/6073505/what-is-the-difference-between-screenx-y-clientx-y-and-pagex-y
+    var y = e.pageY;
+    
+    getCellByCoordinates(x, y);
+}
+
 function main()
 {
     var canvas = document.getElementById('patternCanvas');
@@ -83,6 +107,9 @@ function main()
     drawBackLayer(canvas, topSideCount, leftSideCount);
     drawFrontLayer(canvas, layer);
     drawCanvasCenter(canvas);
+
+    // canvas.addEventListener('mousemove', canvasOnMouseMove);
+    canvas.addEventListener('click', canvasOnClick);
 }
 
 main();
